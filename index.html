@@ -3,138 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Otto Overnight Report — Feb 17-18, 2026</title>
+<title>Otto Overnight Report — Feb 19, 2026</title>
 <style>
-  :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #e6edf3; --dim: #8b949e; --amber: #f0a020; --green: #3fb950; --red: #f85149; --blue: #58a6ff; }
+  :root { --bg: #0d1117; --card: #161b22; --border: #30363d; --text: #e6edf3; --dim: #8b949e; --green: #3fb950; --yellow: #d29922; --red: #f85149; --blue: #58a6ff; --purple: #bc8cff; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: 0 auto; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro', sans-serif; background: var(--bg); color: var(--text); padding: 20px; max-width: 800px; margin: 0 auto; }
   h1 { font-size: 1.8em; margin-bottom: 4px; }
-  .subtitle { color: var(--dim); margin-bottom: 30px; font-size: 0.95em; }
-  .otter { font-size: 1.4em; }
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 30px; }
-  .stat { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
-  .stat .num { font-size: 2em; font-weight: 700; color: var(--amber); }
-  .stat .label { color: var(--dim); font-size: 0.85em; }
-  .section { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
-  .section h2 { font-size: 1.2em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.75em; font-weight: 600; }
-  .tag-done { background: #1a3a2a; color: var(--green); }
-  .tag-partial { background: #3a2a1a; color: var(--amber); }
-  .tag-blocked { background: #3a1a1a; color: var(--red); }
-  .tag-new { background: #1a2a3a; color: var(--blue); }
-  ul { list-style: none; }
-  ul li { padding: 6px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; }
-  ul li:last-child { border-bottom: none; }
-  .check { color: var(--green); flex-shrink: 0; }
-  .partial { color: var(--amber); flex-shrink: 0; }
-  .detail { color: var(--dim); font-size: 0.85em; }
-  .highlight { background: linear-gradient(135deg, #1a2a3a, #1a3a2a); border: 1px solid var(--blue); }
-  .cost { font-family: monospace; color: var(--green); }
-  table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-  th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9em; }
-  th { color: var(--dim); font-weight: 500; }
-  .night-rule { background: linear-gradient(135deg, #2a1a3a, #1a1a3a); border: 1px solid #6e40c9; margin-top: 30px; }
-  .night-rule h2 { color: #d2a8ff; }
-  .footer { text-align: center; color: var(--dim); font-size: 0.8em; margin-top: 30px; padding: 20px; }
+  .subtitle { color: var(--dim); margin-bottom: 24px; font-size: 0.95em; }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+  .card h2 { font-size: 1.15em; margin-bottom: 12px; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.8em; font-weight: 600; margin-right: 6px; }
+  .badge-green { background: rgba(63,185,80,0.15); color: var(--green); }
+  .badge-yellow { background: rgba(210,153,34,0.15); color: var(--yellow); }
+  .badge-blue { background: rgba(88,166,255,0.15); color: var(--blue); }
+  .badge-purple { background: rgba(188,140,255,0.15); color: var(--purple); }
+  .item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .item:last-child { border-bottom: none; }
+  .item-title { font-weight: 600; margin-bottom: 4px; }
+  .item-detail { color: var(--dim); font-size: 0.9em; line-height: 1.5; }
+  .stat-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .stat { flex: 1; min-width: 120px; text-align: center; padding: 14px; background: rgba(255,255,255,0.03); border-radius: 8px; }
+  .stat-num { font-size: 1.6em; font-weight: 700; }
+  .stat-label { color: var(--dim); font-size: 0.8em; margin-top: 2px; }
+  .lesson { padding: 8px 12px; background: rgba(210,153,34,0.08); border-left: 3px solid var(--yellow); border-radius: 0 6px 6px 0; margin: 6px 0; font-size: 0.9em; }
+  .timeline { position: relative; padding-left: 20px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 0; bottom: 0; width: 2px; background: var(--border); }
+  .tl-item { position: relative; padding: 8px 0; }
+  .tl-item::before { content: ''; position: absolute; left: -18px; top: 14px; width: 10px; height: 10px; border-radius: 50%; background: var(--green); border: 2px solid var(--bg); }
+  .tl-time { color: var(--dim); font-size: 0.8em; }
+  .tl-text { font-size: 0.9em; }
 </style>
 </head>
 <body>
 
-<h1><span class="otter">🦦</span> Otto Overnight Report</h1>
-<p class="subtitle">Mon Feb 17 → Tue Feb 18, 2026 • Session: 21:46 – 09:00</p>
+<h1>🦦 Otto Overnight Report</h1>
+<p class="subtitle">Night of Feb 18–19, 2026 • Session: ~11 PM – 5:48 AM BKT</p>
 
-<div class="stats-grid">
-  <div class="stat"><div class="num">17</div><div class="label">Commits</div></div>
-  <div class="stat"><div class="num">12</div><div class="label">Tasks Done</div></div>
-  <div class="stat"><div class="num">6</div><div class="label">ChatGPT Reviews</div></div>
-  <div class="stat"><div class="num">3</div><div class="label">Sub-agents</div></div>
-  <div class="stat"><div class="num">~$0.15</div><div class="label">Qwen Cost</div></div>
+<div class="card">
+  <div class="stat-row">
+    <div class="stat"><div class="stat-num" style="color:var(--green)">8</div><div class="stat-label">Tasks Completed</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--blue)">3</div><div class="stat-label">Systems Fixed</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--purple)">5</div><div class="stat-label">Crons Running</div></div>
+    <div class="stat"><div class="stat-num" style="color:var(--yellow)">0</div><div class="stat-label">Blocked Issues</div></div>
+  </div>
 </div>
 
-<div class="section highlight">
-  <h2>🌟 Big Discovery: Qwen3.5-Plus</h2>
-  <p>Alibaba released <strong>Qwen3.5-Plus</strong> — 397B MoE, 170B active, 1M context window.</p>
-  <table>
-    <tr><th>Benchmark</th><th>Qwen3.5</th><th>GPT-5.2</th><th>Claude 4.5</th></tr>
-    <tr><td>MMLU-Pro</td><td><strong>87.8</strong></td><td>85.2</td><td>84.1</td></tr>
-    <tr><td>GPQA</td><td><strong>88.4</strong></td><td>86.7</td><td>85.9</td></tr>
-    <tr><td>Cost/M tokens</td><td class="cost">$0.80</td><td>$14.40</td><td>$15.00</td></tr>
-  </table>
-  <p class="detail" style="margin-top:8px;">18× cheaper than comparable models. Wired into OpenClaw as <code>alibaba/qwen3.5-plus</code>. First test: Builder Agent security review — harshest of all 3 models, $0.02 per run.</p>
+<div class="card">
+  <h2>🔧 Major Fixes</h2>
+  <div class="item">
+    <div class="item-title"><span class="badge badge-green">FIXED</span> JR Executor Deadlock</div>
+    <div class="item-detail">PID 19600 held lease, died silently → 9 hours idle. Root cause: single-attempt lease acquisition. Fix: retry loop every 10s. Service restarted, confirmed running.</div>
+  </div>
+  <div class="item">
+    <div class="item-title"><span class="badge badge-green">BUILT</span> JR Escalation System</div>
+    <div class="item-detail">Local model → quality gate → DashScope API escalation. Modified 3 files (ollama_client, job_executor, config). Quality gate: code needs ``` blocks + >500 chars.</div>
+  </div>
+  <div class="item">
+    <div class="item-title"><span class="badge badge-green">FIXED</span> JR Escalation Proxy</div>
+    <div class="item-detail">Proxy mode tried to hit Mac:8080 (no proxy there). Switched to direct DashScope API. Confirmed working with real job.</div>
+  </div>
 </div>
 
-<div class="section">
-  <h2>✅ Completed Work</h2>
-  <ul>
-    <li><span class="check">✓</span><div><strong>Model Comparison Page v2</strong> — Larger score badges per Mike's feedback. Published to GitHub Pages.<br><span class="detail">otto-model-comparison-qwen35</span></div></li>
-    <li><span class="check">✓</span><div><strong>Dashboard v3 — ChatGPT Synthesis</strong> — 4 reviews merged into SYNTHESIS.md. ProjectStore actor pattern, merge-before-write, soft delete via hidden flag.<br><span class="detail">Sub-agent completed</span></div></li>
-    <li><span class="check">✓</span><div><strong>Tiered Gateway — 4× ChatGPT Synthesis</strong> — All architecture reviews consolidated into SYNTHESIS.md.<br><span class="detail">Sub-agent completed</span></div></li>
-    <li><span class="check">✓</span><div><strong>StyleForge Architecture Proposal</strong> — STAGE1-CONNECTION-PROPOSAL.md written. MCP webhook recommended.<br><span class="detail">Ready for Mike's architecture decision</span></div></li>
-    <li><span class="check">✓</span><div><strong>Pipeline Intelligence Repo</strong> — Living knowledge base created: RULES.md, MODEL-ROUTING.md, BENCHMARKS.md, LESSONS.md, COST-LOG.md, RETROSPECTIVES.md.<br><span class="detail">10 rules, 5 lessons, 3 cost observations seeded</span></div></li>
-    <li><span class="check">✓</span><div><strong>Builder Analysis Website</strong> — Published at mikehelm.github.io/otto-builder-analysis. Dark theme, charts, benchmarks, security roadmap.<br><span class="detail">Estimated 15min, delivered in ~10min</span></div></li>
-    <li><span class="check">✓</span><div><strong>Cron Migration</strong> — Keep-alive jobs moved from Ollama (unreliable) to Qwen3.5-Plus API.<br><span class="detail">Ollama cold-start >30s causing timeouts</span></div></li>
-    <li><span class="check">✓</span><div><strong>Voice Context Sync</strong> — Latest project/memory context pushed to PC.</div></li>
-    <li><span class="check">✓</span><div><strong>Comparison Summary</strong> — Auto vs Pro vs Qwen across all 6 reviews written to pipeline-intel/COMPARISON-SUMMARY.md.</div></li>
-  </ul>
+<div class="card">
+  <h2>⚡ Dashboard Perf Improvements</h2>
+  <div class="item">
+    <div class="item-title"><span class="badge badge-blue">PERF</span> O(n) Merge with ID Dictionaries</div>
+    <div class="item-detail">Replaced O(n²) firstIndex(where:) lookups in ProjectStore with Dictionary-based ID-to-index maps.</div>
+  </div>
+  <div class="item">
+    <div class="item-title"><span class="badge badge-blue">PERF</span> Cancelable Undo Timer</div>
+    <div class="item-detail">Token-validated undo timer (10s→5s), prevents stale timer firing after cancel.</div>
+  </div>
+  <div class="item">
+    <div class="item-title"><span class="badge badge-blue">PERF</span> Short-circuit Drag</div>
+    <div class="item-detail">moveDraggedProject calculates destination accounting for removal offset, early-returns if no-op.</div>
+  </div>
 </div>
 
-<div class="section">
-  <h2>🔧 Partial / In Progress</h2>
-  <ul>
-    <li><span class="partial">◐</span><div><strong>MindMapForge Phase 1</strong> — 75% complete. Store, STT, LLM, UI, templates done. Build fails (missing <code>immer</code> dep). Branch: feat/intelligence-phase1.<br><span class="tag tag-partial">75%</span></div></li>
-    <li><span class="partial">◐</span><div><strong>Kokoro GPU (RTX 5090)</strong> — PyTorch nightly installed but Blackwell sm_120 needs cu128 builds (don't exist yet). Reverted to CPU — works fine.<br><span class="tag tag-blocked">Waiting on PyTorch</span></div></li>
-    <li><span class="partial">◐</span><div><strong>PC BitLocker + Sunshine</strong> — Guide + scripts ready, TPM verified. Needs Mike's GUI steps.<br><span class="tag tag-blocked">Needs Mike</span></div></li>
-  </ul>
+<div class="card">
+  <h2>🤖 JR Status (5:44 AM)</h2>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-num" style="color:var(--green)">✅</div><div class="stat-label">Healthy</div></div>
+    <div class="stat"><div class="stat-num">1h32m</div><div class="stat-label">Uptime</div></div>
+    <div class="stat"><div class="stat-num">0</div><div class="stat-label">Queue Depth</div></div>
+    <div class="stat"><div class="stat-num">225GB</div><div class="stat-label">Disk Free</div></div>
+  </div>
+  <div style="margin-top:12px; font-size:0.9em; color:var(--dim)">
+    GPU: 1.0/31.8 GB • Ollama: connected, qwen3:32b loaded • Last job: research task (18s, passed quality gate)
+  </div>
 </div>
 
-<div class="section">
-  <h2>📊 Triple-Review Pipeline (New Process)</h2>
-  <p>Mike locked in the review pipeline:</p>
-  <ol style="list-style: decimal; padding-left: 20px; color: var(--dim);">
-    <li>ChatGPT Auto + Qwen3.5-Plus <strong>in parallel</strong></li>
-    <li>Fix issues → iterate until BOTH score 9+</li>
-    <li>Final sign-off with <strong>ChatGPT Pro</strong></li>
-    <li>Log results to pipeline-intel, short summary to Mike</li>
-  </ol>
-  <p class="detail" style="margin-top:8px;">Keep all 3 until enough data shows which are essential vs redundant.</p>
+<div class="card">
+  <h2>📋 Cron Jobs Active</h2>
+  <div class="item"><div class="item-title">JR Health & Job Monitor</div><div class="item-detail">Every 5 min • Qwen 3.5 Plus • All checks passing</div></div>
+  <div class="item"><div class="item-title">ChatGPT Pro Response Check</div><div class="item-detail">Every 15 min • Kimi K2.5 • MindMapForge review captured</div></div>
+  <div class="item"><div class="item-title">OTTOPROJECTS Folder Monitor</div><div class="item-detail">Every 15 min • Qwen 3.5 Plus • No changes detected</div></div>
+  <div class="item"><div class="item-title">Claude Usage Scraper</div><div class="item-detail">Every 30 min • Kimi K2.5 • Running</div></div>
+  <div class="item"><div class="item-title">Autonomous Work Check</div><div class="item-detail">Every 10 min • Opus • Queue clear, all tasks done</div></div>
 </div>
 
-<div class="section">
-  <h2>🏗️ Other Noteworthy</h2>
-  <ul>
-    <li><span class="check">✓</span><div><strong>LuckyTailor Domains</strong> — 50 checked, 37 available. Top picks: luckytailoring.com, luckybespoke.com, theluckytailor.com</div></li>
-    <li><span class="check">✓</span><div><strong>PC Troubleshooting</strong> — RDP fixed (NLA disabled), Ollama set to auto-start on boot</div></li>
-    <li><span class="check">✓</span><div><strong>ChatGPT A/B Test</strong> — Auto vs Pro on 3 identical prompts. Pro harsher on security (4.5 vs 6.5), catches deeper issues, more concise.</div></li>
-  </ul>
+<div class="card">
+  <h2>📝 ChatGPT Pro</h2>
+  <div class="item">
+    <div class="item-title"><span class="badge badge-purple">CAPTURED</span> MindMapForge Architecture Review</div>
+    <div class="item-detail">8-section review with adapter design, transactional model, and state machine recommendations. Saved to projects/mindmapforge/. 3 optional follow-ups offered (not yet pursued).</div>
+  </div>
 </div>
 
-<div class="section">
-  <h2>⏳ Still Waiting on Mike</h2>
-  <ul>
-    <li>🔴 TellAnything domain purchase</li>
-    <li>🔴 Workspace backup — create private GitHub repo</li>
-    <li>🔴 StyleForge architecture decision</li>
-    <li>🔴 SonarCloud OAuth login</li>
-    <li>🔴 PC BitLocker/Sunshine GUI steps</li>
-    <li>🔴 WSL2 Ubuntu GUI install</li>
-  </ul>
+<div class="card">
+  <h2>⏱️ Timeline</h2>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-time">~23:00</div><div class="tl-text">Mike said goodnight — night protocol activated</div></div>
+    <div class="tl-item"><div class="tl-time">01:30</div><div class="tl-text">Dashboard perf fixes deployed (Codex)</div></div>
+    <div class="tl-item"><div class="tl-time">02:00</div><div class="tl-text">JR deadlock diagnosed — 9hr idle from leaked lease</div></div>
+    <div class="tl-item"><div class="tl-time">03:30</div><div class="tl-text">Failure report + audit page deployed to Netlify</div></div>
+    <div class="tl-item"><div class="tl-time">04:00</div><div class="tl-text">Mike checked in — ordered full JR autonomy</div></div>
+    <div class="tl-item"><div class="tl-time">04:06</div><div class="tl-text">JR escalation system built & deployed</div></div>
+    <div class="tl-item"><div class="tl-time">04:08</div><div class="tl-text">Escalation proxy fix — direct DashScope</div></div>
+    <div class="tl-item"><div class="tl-time">04:14</div><div class="tl-text">MindMapForge job verified — local model passed quality gate</div></div>
+    <div class="tl-item"><div class="tl-time">05:32</div><div class="tl-text">ChatGPT Pro review captured</div></div>
+    <div class="tl-item"><div class="tl-time">05:48</div><div class="tl-text">All systems nominal — report updated</div></div>
+  </div>
 </div>
 
-<div class="section night-rule">
-  <h2>🌙 New Night Protocol (effective tonight)</h2>
-  <p>Per Mike's request — when Mike says goodnight:</p>
-  <ul style="list-style: disc; padding-left: 20px;">
-    <li>No Telegram messages unless truly urgent</li>
-    <li>Save all output to daily memory files</li>
-    <li>Build/update this overnight report page</li>
-    <li>When Mike wakes up: one short summary + link to this page</li>
-  </ul>
-  <p class="detail" style="margin-top:8px;">No more 19 unread messages. One link, one brief. ✅</p>
+<div class="card">
+  <h2>💡 Lessons Learned Tonight</h2>
+  <div class="lesson">Single-attempt lease acquisition = silent 9-hour failure. Always retry in a loop.</div>
+  <div class="lesson">Quality gate without configured escalation endpoint = pointless. Verify end-to-end.</div>
+  <div class="lesson">Prompt quality > model size. Detailed prompts with file paths + constraints → local model produces good code.</div>
+  <div class="lesson">Don't submit a job and walk away — check on your reports.</div>
+  <div class="lesson">Pre-schedule autonomous work via cron before context fills up.</div>
 </div>
 
-<div class="footer">
-  <p>🦦 Generated by Otto • Last updated: Feb 18, 2026 09:05 ICT</p>
-  <p>Powered by Opus + Qwen3.5-Plus + Codex</p>
+<div style="text-align:center; color:var(--dim); padding: 20px; font-size: 0.85em;">
+  🦦 Otto • Autonomous Night Operations • Feb 19, 2026
 </div>
 
 </body>
